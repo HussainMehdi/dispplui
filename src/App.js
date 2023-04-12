@@ -108,13 +108,15 @@ function App() {
     });
 
     // flat discog record keys to ppl record keys and write to csv while keeping similaity score
-    const pplWithSimilarityDiscogFlat = pplWithSimilarityDiscog.map((pplRecord) => {
+    const _pplWithSimilarityDiscogFlat = pplWithSimilarityDiscog.map((pplRecord) => {
       const pplRecordFlat = { ...pplRecord };
       delete pplRecordFlat.discog;
       delete pplRecordFlat.similarity;
       const discogRecordFlat = { ...pplRecord.discog };
       return { ...pplRecordFlat, similarityScore: pplRecord.similarity.score, ...discogRecordFlat };
     });
+
+    const pplWithSimilarityDiscogFlat  = Array.from(new Set(_pplWithSimilarityDiscogFlat.map(t => t.recordingId))).map(recordId => _pplWithSimilarityDiscogFlat.find(t => t.recordingId === recordId))
 
     const pplWithSimilarityDiscogFlatCSV = Object.keys(pplWithSimilarityDiscogFlat[0]).join(',') + '\n' + pplWithSimilarityDiscogFlat.map((pplRecord) => {
       return Object.values(pplRecord).join(',');
