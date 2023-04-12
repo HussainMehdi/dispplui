@@ -148,7 +148,7 @@ function App() {
 				<div class="box">
 					{/* <input type="file" name="file-1[]" id="file-2" class="inputfile inputfile-1" onChange={readPPLFile}/> */}
           <button class="inputfile inputfile-1" onClick={compareMap}>{mapBtnTxt}</button>
-					<label for="map"> <span>{mapBtnTxt}</span></label>
+					<label for="map" onClick={compareMap}> <span>{mapBtnTxt}</span></label>
 				</div>
 			</div>
 
